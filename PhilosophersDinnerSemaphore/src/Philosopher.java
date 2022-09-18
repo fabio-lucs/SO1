@@ -32,23 +32,9 @@ public class Philosopher implements Runnable {
         }
     }
 
-    private void returnFork() throws InterruptedException {
-        this.left_fork.release();
-        this.right_fork.release();
-        System.out.println("The philosopher " + this.id + " dropped the forks.\n");
-    }
-
-    private void eat() throws InterruptedException {
-        System.out.println("The philosopher " + this.id + " is eating.\n");
+    private void think() throws InterruptedException {
+        System.out.println("The philosopher " + this.id + " is thinking.\n");
         Thread.sleep(number.nextInt(1000));
-    }
-
-    private void takeRightFork() throws InterruptedException {
-        if (this.right_fork.availablePermits() == 0) {
-            System.out.println("the philosopher " + this.id + " is waiting for the right fork.\n");
-        }
-        this.right_fork.acquire();
-        System.out.println("the philosopher " + this.id + " is holding for the right fork.\n");
 
     }
 
@@ -61,10 +47,24 @@ public class Philosopher implements Runnable {
 
     }
 
-    private void think() throws InterruptedException {
-        System.out.println("The philosopher " + this.id + " is thinking.\n");
-        Thread.sleep(number.nextInt(1000));
+    private void takeRightFork() throws InterruptedException {
+        if (this.right_fork.availablePermits() == 0) {
+            System.out.println("the philosopher " + this.id + " is waiting for the right fork.\n");
+        }
+        this.right_fork.acquire();
+        System.out.println("the philosopher " + this.id + " is holding for the right fork.\n");
 
+    }
+
+    private void eat() throws InterruptedException {
+        System.out.println("The philosopher " + this.id + " is eating.\n");
+        Thread.sleep(number.nextInt(1000));
+    }
+
+    private void returnFork() throws InterruptedException {
+        this.left_fork.release();
+        this.right_fork.release();
+        System.out.println("The philosopher " + this.id + " dropped the forks.\n");
     }
 
 }
