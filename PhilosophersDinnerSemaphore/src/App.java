@@ -21,7 +21,7 @@ public class App {
 
         // Aguarda um tempo ou condição para encerrar o programa
         try {
-            Thread.sleep(10000); // Espera 10 segundos (você pode ajustar esse valor)
+            Thread.sleep(10000); 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
