@@ -19,5 +19,17 @@ public class App {
             new Thread(philosopher[i]).start();
         }
 
+        // Aguarda um tempo ou condição para encerrar o programa
+        try {
+            Thread.sleep(10000); // Espera 10 segundos (você pode ajustar esse valor)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Define a condição de parada
+        for (Philosopher p : philosopher) {
+            p.stopPhilosopher();
+        }
     }
+
 }

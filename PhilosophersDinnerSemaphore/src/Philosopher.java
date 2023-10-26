@@ -9,6 +9,7 @@ public class Philosopher implements Runnable {
     private int id;
     private Semaphore left_fork;
     private Semaphore right_fork;
+    private boolean shouldRun = true;
 
     public Philosopher(int id, Semaphore left_fork, Semaphore right_fork) {
         this.id = id;
@@ -19,13 +20,12 @@ public class Philosopher implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (shouldRun) {
                 think();
                 takeLeftFork();
                 takeRightFork();
                 eat();
                 returnFork();
-
             }
         } catch (Exception e) {
             System.out.println("The philosopher " + this.id + " was interrupted.");
@@ -65,6 +65,10 @@ public class Philosopher implements Runnable {
         this.left_fork.release();
         this.right_fork.release();
         System.out.println("The philosopher " + this.id + " dropped the forks.\n");
+    }
+
+    public void stopPhilosopher() {
+        shouldRun = false;
     }
 
 }
